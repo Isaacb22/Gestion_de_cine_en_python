@@ -1,4 +1,23 @@
 porcentaje_de_clientes_vip = 20
+lista_salas = []
+config = {}
+
+
+
+def eleccion_cliente():
+	while True:
+		try:
+			elegir_cliente = int(input('Que tipo de cliente quiere ser? \n\n\t\t\t1)VIP o 2)NORMAL:'))
+			if elegir_cliente == 1:
+				config["cont_vip"]+=1
+			else:
+				if elegir_cliente == 2:
+					config["cont_normal"] +=1
+		except ValueError:
+			print ('\nCaracter invalido, solo se permiten numeros')
+		
+
+
 
 def validacion_de_porcentaje(limite_sala,clientes_vip):
 	porcentaje_total = int(limite_sala) * int(porcentaje_de_clientes_vip) / 100
@@ -20,57 +39,45 @@ def menu():
 	
 	if selecciona_una_opcion == '1':
 		print ("\nTu has elegido la opcion Control de salas")
-		control_de_salas()
+		control_de_salas(config)
 
 
 
 	
-def control_de_salas():
+def control_de_salas(config):
 	while True:
 		try:
-			numero_de_salas = int(input("\nIngrese el numero de salas: "))
+			nro_sala = int(input("\nIngrese el numero de salas: "))
 			break	
 	
 		except ValueError:
 			print ('\nCaracter invalido, solo se permiten numeros')
 	
-	lista_salas = []
 	
-	for i in range(1,int(numero_de_salas)+1):
-		obj_sala = {}
+	
+	for i in range(1,int(nro_sala)+1):
+		
 		
 		while True:
 			try:
-				limite_sala = int(input("\nIngrese el limite para la sala {}: ".format(i)))
+				config['limite_sala'] = int(input("\nIngrese el limite para la sala {}: ".format(i)))
+				
 				break
 			
 			except ValueError:
 				print ('\nCaracter invalido, solo se permiten numeros')	
 		
-		while True:
-			try:
-				clientes_vip = int(input("\nIngrese la cantidad de clientes VIP de la sala {}: ".format(i)))
-				break
-			
-			except ValueError:
-				print ('\nCaracter invalido, solo se permiten numeros')		
+		eleccion_cliente()
 		
-		while True:
-			try:
-				clientes_normales = int(input("\nIngrese la cantidad de clientes normales de la sala {}: ".format(i)))
-			
-			except ValueError:
-				print ('\nCaracter invalido, solo se permiten numeros')
-
-		obj_sala['nro_sala'] = i
-		obj_sala['limite_sala'] = limite_sala
-		obj_sala['clientes_vip'] = clientes_vip
-		while validacion_de_porcentaje(limite_sala,clientes_vip) == False:
+		config['num_sala'] = i
+		
+		
+		while validacion_de_porcentaje(config["limite_sala"],config["cont_vip"]) == False:
 			print ("Limite de asientos VIP excedido")
-			clientes_vip = input("Ingrese la cantidad de clientes VIP de la sala {}: ".format(i))
+			config["cont_vip"] = input("Ingrese la cantidad de clientes VIP de la sala {}: ".format(i))
 
-		obj_sala['clientes_normales'] = clientes_normales
-		lista_salas.append(obj_sala)
-		obj_sala = {}   
+		
+		lista_salas.append(config)
+		config = {}  
 	
 menu()
