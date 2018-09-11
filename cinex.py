@@ -1,22 +1,28 @@
 porcentaje_de_clientes_vip = 20
 lista_salas = []
-config = {}
+config = {
+	'cont_vip': 0,
+	'cont_normal': 0
+	'limite_sala':0	
+
+}
+ 
 
 
-
-def eleccion_cliente():
+def eleccion_cliente(config):
 	while True:
 		try:
-			elegir_cliente = int(input('Que tipo de cliente quiere ser? \n\n\t\t\t1)VIP o 2)NORMAL:'))
+			elegir_cliente = int(input('\nQue tipo de cliente quiere ser? \n\n\t\t\t1)VIP  \t\t\t\t\t\t2)NORMAL : '))
 			if elegir_cliente == 1:
-				config["cont_vip"]+=1
+				config['cont_vip']+=1
 			else:
 				if elegir_cliente == 2:
-					config["cont_normal"] +=1
+					config['cont_normal'] += 1
 		except ValueError:
 			print ('\nCaracter invalido, solo se permiten numeros')
+		print (config["cont_vip"])
+		print (config["cont_normal"])
 		
-
 
 
 def validacion_de_porcentaje(limite_sala,clientes_vip):
@@ -67,7 +73,8 @@ def control_de_salas(config):
 			except ValueError:
 				print ('\nCaracter invalido, solo se permiten numeros')	
 		
-		eleccion_cliente()
+		eleccion_cliente(config)
+		
 		
 		config['num_sala'] = i
 		
