@@ -1,41 +1,48 @@
 import getpass
 porcentaje_de_clientes_vip = 20
-lista_salas = []
 cont_vip = 0
 cont_normal = 0
-salas = {}
+salas = []
+nombre_de_sala = ""
+limite_sala = 0
+
 
 def mostrar_salas():
-	print("\n\n\t\t\t\t\t\t\t\tSeleccione un sala: \n")
+	print("\n\n\t\t\t\t\t\t\t\tSeleccione una sala: \n")
 
 	for i,n in enumerate(salas.keys()):
 		print("{}) {}\n".format(i+1, n))
 
 
 
-def eleccion_cliente(cont_normal,cont_vip):
+def eleccion_cliente(normal,vip,nombre):
+	global cont_vip
+	global cont_normal
+	global nombre_de_sala
+
 	while True:
 		try:
 			mostrar_salas()
 			entrar_sala = input("A cual sala quiere entrar? ")
-			if entrar_sala != salas.keys():
+			
+			if entrar_sala not in salas.keys():
 				print ("\nTiene que elegir la sala a la que quiere entrar")
 			else:
-				print("Usted a elegido entrar a la sala" + salas.keys())
-				elegir_cliente = int(input('\nQue tipo de cliente quiere ser? \n\n\t\t\t1)VIP  \t\t\t\t\t\t2)NORMAL : '))
-				if elegir_cliente == 1:
-					print(cont_vip) 
-					cont_vip += 1
-				if elegir_cliente == 2:
-					print(cont_normal)
-					cont_normal += 1
+				print("\nUsted a elegido entrar a la " + entrar_sala)
+			elegir_cliente = int(input('\nQue tipo de cliente quiere ser? \n\n\t\t\t1)VIP  \t\t\t\t\t\t2)NORMAL : '))
+			if elegir_cliente == 1: 
+				salas[nombre].vip = vip + 1
+			if elegir_cliente == 2:
+				cont_normal = normal + 1
+			print(salas)
+			print(cont_normal)
 		except ValueError:
 			print ('\nCaracter invalido, solo se permiten numeros')
 		
-	
-	while validacion_de_porcentaje(limite_sala) == False:
-			print ("Limite de asientos VIP excedido")
-			cont_vip = input("Ingrese la cantidad de clientes VIP de la sala {}: ".format(i))
+		break
+	#while validacion_de_porcentaje("3") == False:
+			#print ("Limite de asientos VIP excedido")
+			#cont_vip = input("Ingrese la cantidad de clientes VIP de la sala : ")
 
 
 def validacion_de_porcentaje(limite_sala):
@@ -74,7 +81,7 @@ def menu():
 	
 	if selecciona_una_opcion == '2':
 		print ("\nTu has elegido la opcion Contro de clientes")
-		eleccion_cliente(1,1)
+		eleccion_cliente(cont_normal,cont_vip,nombre_de_sala)
 	
 	
 	
@@ -94,8 +101,10 @@ def control_de_salas():
 		while True:
 			try:
 				limite_sala = int(input("\nIngrese el limite para la sala {}: ".format(i)))
-				nombre_de_salas = "sala{}".format(i)
-				salas[nombre_de_salas] = {"limite" : limite_sala}
+				nombre_de_sala = "sala {}".format(i)
+				salas.append([nombre_de_sala,0,0,limite_sala])
+
+
 				break
 			
 
