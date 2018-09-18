@@ -10,8 +10,8 @@ limite_sala = 0
 def mostrar_salas():
 	print("\n\n\t\t\t\t\t\t\t\tSeleccione una sala: \n")
 
-	for i,n in enumerate(salas.keys()):
-		print("{}) {}\n".format(i+1, n))
+	for i,n in enumerate(salas):
+		print("{}) {}\n".format(i+1, n[0]))
 
 
 
@@ -24,18 +24,18 @@ def eleccion_cliente(normal,vip,nombre):
 		try:
 			mostrar_salas()
 			entrar_sala = input("A cual sala quiere entrar? ")
-			
-			if entrar_sala not in salas.keys():
+			if entrar_sala not in salas:
 				print ("\nTiene que elegir la sala a la que quiere entrar")
 			else:
 				print("\nUsted a elegido entrar a la " + entrar_sala)
 			elegir_cliente = int(input('\nQue tipo de cliente quiere ser? \n\n\t\t\t1)VIP  \t\t\t\t\t\t2)NORMAL : '))
-			if elegir_cliente == 1: 
-				salas[nombre].vip = vip + 1
-			if elegir_cliente == 2:
-				cont_normal = normal + 1
-			print(salas)
-			print(cont_normal)
+			for i in range(len(salas)):
+				if entrar_sala in salas[i] and elegir_cliente == 1:
+					salas[i][1] += 1
+					print (salas[i])
+				if entrar_sala in salas[i] and elegir_cliente == 2:
+					salas[i][2] += 1
+					print(salas[i])
 		except ValueError:
 			print ('\nCaracter invalido, solo se permiten numeros')
 		
