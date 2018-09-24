@@ -1,4 +1,5 @@
 import getpass
+limite_validacion_veinte = 0
 porcentaje_de_clientes_vip = 20
 cont_vip = 0
 cont_normal = 0
@@ -32,21 +33,21 @@ def eleccion_cliente(normal,vip,nombre):
 			for i in range(len(salas)):
 				if entrar_sala in salas[i] and elegir_cliente == 1:
 					salas[i][1] += 1
-					print (salas[i])
+					
 				if entrar_sala in salas[i] and elegir_cliente == 2:
 					salas[i][2] += 1
-					print(salas[i])
+					
 		except ValueError:
 			print ('\nCaracter invalido, solo se permiten numeros')
 		
 		break
-	#while validacion_de_porcentaje("3") == False:
+	#while validacion_de_porcentaje(limite) == False:
 			#print ("Limite de asientos VIP excedido")
 			#cont_vip = input("Ingrese la cantidad de clientes VIP de la sala : ")
 
 
-def validacion_de_porcentaje(limite_sala):
-	porcentaje_total = int(limite_sala) * int(porcentaje_de_clientes_vip) / 100
+def validacion_de_porcentaje(limi):
+	porcentaje_total = int(limi) * int(porcentaje_de_clientes_vip) / 100
 	if int(cont_vip) < int(porcentaje_total):
 		return 	True
 	else:
