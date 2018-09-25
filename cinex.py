@@ -17,22 +17,24 @@ def mostrar_salas():
 
 
 def eleccion_cliente(normal,vip,nombre):
-	global cont_vip
-	global cont_normal
-	global nombre_de_sala
 
 	while True:
 		try:
 			mostrar_salas()
 			entrar_sala = input("A cual sala quiere entrar? ")
+			
 			if entrar_sala not in salas:
 				print ("\nTiene que elegir la sala a la que quiere entrar")
 			else:
 				print("\nUsted a elegido entrar a la " + entrar_sala)
 			elegir_cliente = int(input('\nQue tipo de cliente quiere ser? \n\n\t\t\t1)VIP  \t\t\t\t\t\t2)NORMAL : '))
+			
 			for i in range(len(salas)):
 				if entrar_sala in salas[i] and elegir_cliente == 1:
-					salas[i][1] += 1
+					if validacion_de_porcentaje(salas[i][3]) == False:
+						print ("Limite de asientos VIP excedido")
+					else:
+						salas[i][1] += 1
 					
 				if entrar_sala in salas[i] and elegir_cliente == 2:
 					salas[i][2] += 1
@@ -41,17 +43,25 @@ def eleccion_cliente(normal,vip,nombre):
 			print ('\nCaracter invalido, solo se permiten numeros')
 		
 		break
-	#while validacion_de_porcentaje(limite) == False:
-			#print ("Limite de asientos VIP excedido")
-			#cont_vip = input("Ingrese la cantidad de clientes VIP de la sala : ")
+	
+	while validacion_de_porcentaje(5) == False:
+			print ("Limite de asientos VIP excedido")
+			
+			elegir_cliente = int(input('\nQue tipo de cliente quiere ser? \n\n\t\t\t1)VIP  \t\t\t\t\t\t2)NORMAL : '))
 
 
-def validacion_de_porcentaje(limi):
-	porcentaje_total = int(limi) * int(porcentaje_de_clientes_vip) / 100
-	if int(cont_vip) < int(porcentaje_total):
-		return 	True
-	else:
-		return False
+
+
+def validacion_de_porcentaje(limite):
+	
+	porcentaje_total = int(limite) * int(porcentaje_de_clientes_vip) / 100
+	for i in range(len(salas)):
+		
+		if salas[i][1] > int(porcentaje_total):
+			return 	False
+		else:
+			return True
+		
 
 
 def menu():
@@ -104,7 +114,6 @@ def control_de_salas():
 				limite_sala = int(input("\nIngrese el limite para la sala {}: ".format(i)))
 				nombre_de_sala = "sala {}".format(i)
 				salas.append([nombre_de_sala,0,0,limite_sala])
-
 
 				break
 			
