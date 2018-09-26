@@ -1,25 +1,23 @@
 import getpass
 limite_validacion_veinte = 0
 porcentaje_de_clientes_vip = 20
-cont_vip = 0
-cont_normal = 0
 salas = []
 nombre_de_sala = ""
 limite_sala = 0
-
+nro_sala = 0 
 
 def registro_de_administrador():
 	nombre_de_usuario = input("\nIngrese su nombre de usuario: ")
-		contrasena = getpass.getpass('\nIngrese su contrasena: ')
-		while True:
-			if nombre_de_usuario != 'isaacb22' or contrasena != '1234':
-				print ('\nInicio de sesion fallido. Intente otra vez')
-				nombre_de_usuario = input("\nIngrese su nombre de usuario: ")
-				contrasena = getpass.getpass('\nIngrese su contrasena: ')
-			else:
-				print ("\nInicio de sesion exitoso")
-				control_de_salas()
-				break
+	contrasena = getpass.getpass('\nIngrese su contrasena: ')
+	while True:
+		if nombre_de_usuario != 'isaacb22' or contrasena != '1234':
+			print ('\nInicio de sesion fallido. Intente otra vez')
+			nombre_de_usuario = input("\nIngrese su nombre de usuario: ")
+			contrasena = getpass.getpass('\nIngrese su contrasena: ')
+		else:
+			print ("\nInicio de sesion exitoso")
+			control_de_salas()
+			break
 
 
 def mostrar_salas():
@@ -51,7 +49,7 @@ def eleccion_cliente():
 						
 					else:
 						salas[i][1] += 1
-						print (salas[i][1])
+						
 				if entrar_sala in salas[i] and elegir_cliente == 2:
 					salas[i][2] += 1
 					
@@ -91,7 +89,9 @@ def menu():
 	if selecciona_una_opcion == '1':
 		print ("\nTu has elegido la opcion Control de salas")
 		registro_de_administrador()
-	if selecciona_una_opcion == '2':
+	if selecciona_una_opcion != '2' or limite_sala == 0 or nro_sala == 0:
+		print ("\n\n\t\t\t\tAun no puede entrar en esta opcion, espere que el administrador llene la opcion 1")
+	else:
 		print ("\nTu has elegido la opcion Contro de clientes")
 		eleccion_cliente()
 	
