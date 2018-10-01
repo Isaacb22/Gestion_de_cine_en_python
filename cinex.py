@@ -24,7 +24,7 @@ def mostrar_salas():
 	print("\n\n\t\t\t\t\t\t\t\tSeleccione una sala: \n")
 
 	for i,n in enumerate(salas):
-		print("{}) {}\n".format(i+1, n[0]))
+		print("{}) {}\n ".format(i+1, n[0]))
 
 
 
@@ -44,6 +44,8 @@ def eleccion_cliente():
 			for i in range(len(salas)):
 				
 				if entrar_sala in salas[i] and elegir_cliente == 1:
+					
+
 					if validacion_de_porcentaje(salas[i][3]) == False:
 						print ("\n\nLimite de asientos VIP excedido\n")
 						
@@ -52,17 +54,14 @@ def eleccion_cliente():
 						
 				if entrar_sala in salas[i] and elegir_cliente == 2:
 					salas[i][2] += 1
-					
+				
+				
+				
 		except ValueError:
 			print ('\nCaracter invalido, solo se permiten numeros')
 		
 		
 	
-	
-
-
-
-
 def validacion_de_porcentaje(limite):
 	
 	porcentaje_total = int(limite) * int(porcentaje_de_clientes_vip) / 100
@@ -89,13 +88,16 @@ def menu():
 	if selecciona_una_opcion == '1':
 		print ("\nTu has elegido la opcion Control de salas")
 		registro_de_administrador()
-	if selecciona_una_opcion != '2' or limite_sala == 0 or nro_sala == 0:
-		print ("\n\n\t\t\t\tAun no puede entrar en esta opcion, espere que el administrador llene la opcion 1")
-	else:
-		print ("\nTu has elegido la opcion Contro de clientes")
-		eleccion_cliente()
-	
-	
+		
+	if selecciona_una_opcion == '2': 
+		if len(salas) == 0:
+			print ("\n\t\t\t\t\tNo puede entrar a esta opcion, no hay salas disponibles")
+			
+		else:	
+			eleccion_cliente()
+					
+	if selecciona_una_opcion == '3':
+		print (salas)
 	
 def control_de_salas():
 	while True:
