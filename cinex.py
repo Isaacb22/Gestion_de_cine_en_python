@@ -45,17 +45,23 @@ def eleccion_cliente():
 				
 				if entrar_sala in salas[i] and elegir_cliente == 1:
 					
-
 					if validacion_de_porcentaje(salas[i][3]) == False:
 						print ("\n\nLimite de asientos VIP excedido\n")
 						
 					else:
 						salas[i][1] += 1
-						
+					
 				if entrar_sala in salas[i] and elegir_cliente == 2:
 					salas[i][2] += 1
-				
-				
+					 
+
+				if entrar_sala in salas[i]:
+					print(salas[i][1] + salas[i][2])
+					if salas[i][3] == salas[i][1] + salas[i][2]:
+						print ("\n\t\t\t\t\t\t\tLa sala esta llena, ya no puede entrar")
+						
+					else:
+						continue
 				
 		except ValueError:
 			print ('\nCaracter invalido, solo se permiten numeros')
