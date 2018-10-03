@@ -29,16 +29,27 @@ def mostrar_salas():
 
 
 def eleccion_cliente():
-
+ 
 	while True:
 		try:
 			mostrar_salas()
 			entrar_sala = input("A cual sala quiere entrar? ")
-			
+				
+
 			if entrar_sala not in salas:
-				print ("\nTiene que elegir la sala a la que quiere entrar")
+				print ("\nEliga la sala a la que quiere entrar")
 			else:
 				print("\nUsted a elegido entrar a la " + entrar_sala)
+			
+			for i in range(len(salas)):
+				if entrar_sala in salas[i]:	
+					
+					if salas[i][3] < salas[i][1] + salas[i][2]:
+						print ("\n\t\t\t\t\t\t\tLa sala se ha llenado, no puede entrar mas nadie")									
+						salas[i][elegir_cliente] = salas[i][elegir_cliente] - 1			
+					else:
+						continue
+
 			elegir_cliente = int(input('\nQue tipo de cliente quiere ser? \n\n\t\t\t1)VIP  \t\t\t\t\t\t2)NORMAL : '))
 			
 			for i in range(len(salas)):
@@ -49,19 +60,13 @@ def eleccion_cliente():
 						print ("\n\nLimite de asientos VIP excedido\n")
 						
 					else:
-						salas[i][1] += 1
+						salas[i][1] += 1  
 					
 				if entrar_sala in salas[i] and elegir_cliente == 2:
-					salas[i][2] += 1
-					 
+					salas[i][2] += 1 
+					
 
-				if entrar_sala in salas[i]:
-					print(salas[i][1] + salas[i][2])
-					if salas[i][3] == salas[i][1] + salas[i][2]:
-						print ("\n\t\t\t\t\t\t\tLa sala esta llena, ya no puede entrar")
-						
-					else:
-						continue
+				
 				
 		except ValueError:
 			print ('\nCaracter invalido, solo se permiten numeros')
@@ -102,8 +107,10 @@ def menu():
 		else:	
 			eleccion_cliente()
 					
-	if selecciona_una_opcion == '3':
-		print (salas)
+
+
+	#if selecciona_una_opcion == '3':
+		#print (salas)
 	
 def control_de_salas():
 	while True:
